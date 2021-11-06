@@ -18,4 +18,9 @@ describe Author, type: :model do
     expect(author.last_name).to eq(last_name)
     expect(author.homepage).to eq(homepage)
   end
+
+  it "should offer a method to get the full name" do
+    author = build :author
+    expect(author.name).to eq("Alan Turing")
+  end
 end
