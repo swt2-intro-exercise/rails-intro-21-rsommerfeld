@@ -6,12 +6,16 @@ describe "Show authors index page", type: :feature do
   end
 
   it "should already contain information about a specific existing author" do
-    author = create :author
+    create :author
     visit authors_path
 
-    expect(page).to have_text("Alan")
-    expect(page).to have_text("Turing")
+    expect(page).to have_text("Alan Turing")
     expect(page).to have_text("http://wikipedia.de/Alan_Turing")
+  end
+
+  it "should have a link to the page to create new authors on" do
+    visit authors_path
+    expect(page).to have_link "New", href: new_author_path
   end
 end
 
