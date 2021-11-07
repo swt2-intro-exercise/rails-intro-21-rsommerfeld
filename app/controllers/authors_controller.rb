@@ -1,4 +1,8 @@
 class AuthorsController < ApplicationController
+  def show
+    @author = Author.find(params[:id])
+  end
+
   def new
     @author = Author.new
   end
@@ -8,7 +12,6 @@ class AuthorsController < ApplicationController
     # save the author but always render the new page again
     @author.save
     render :new
-
   end
 
   private
