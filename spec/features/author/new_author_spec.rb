@@ -61,6 +61,6 @@ describe "New author page", type: :feature do
 
 
     # expect to now see an error printed
-    expect(page).to have_text("Last name can't be blank")
+    expect(page).to have_text("error")
   end
 end
