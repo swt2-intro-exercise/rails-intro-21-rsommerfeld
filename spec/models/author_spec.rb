@@ -2,8 +2,6 @@ require 'rails_helper'
 
 describe Author, type: :model do
   it "should have a constructor that can create author instances" do
-    expect(Author.new).to be_valid
-
     author = Author.new
     expect(author).to be_an_instance_of(Author)
   end
@@ -22,5 +20,12 @@ describe Author, type: :model do
   it "should offer a method to get the full name" do
     author = build :author
     expect(author.name).to eq("Alan Turing")
+  end
+
+  it "should not be valid without a last name" do
+    author = build :author
+    author.last_name = ""
+
+    expect(author).to_not be_valid
   end
 end
