@@ -29,7 +29,7 @@ describe "New author page", type: :feature do
   end
 
   it "should actually create a new author when submitting the form" do
-    # expect to find a new author in the db
+    # expect to not yet find the new author in the db
     author = Author.where(first_name: "Alan", last_name: "Turing", homepage: "http://wikipedia.org/Alan_Turing").take
     expect(author).to be_nil
 
@@ -43,5 +43,24 @@ describe "New author page", type: :feature do
     # expect to find a new author in the db
     author = Author.where(first_name: "Alan", last_name: "Turing", homepage: "http://wikipedia.org/Alan_Turing").take
     expect(author).not_to be_nil
+  end
+
+  it "should show the error text, when no last name is inserted and the user wants to submit" do
+    visit new_author_path
+
+    # expect to not see any errors yet
+    expect(page).to_not have_text("Last name can't be blank")
+
+    fill_in "author[first_name]", with: "Alan"
+    fill_in "author[homepage]", with: 'http://wikipedia.org/Alan_Turing'
+    find('input[type="submit"]').click
+
+    # expect to not yet find the new author in the db
+    author = Author.where(first_name: "Alan", homepage: "http://wikipedia.org/Alan_Turing").take
+    expect(author).to be_nil
+
+
+    # expect to now see an error printed
+    expect(page).to have_text("Last name can't be blank")
   end
 end
