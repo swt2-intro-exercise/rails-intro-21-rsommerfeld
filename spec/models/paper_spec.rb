@@ -44,7 +44,7 @@ RSpec.describe Paper, type: :model do
     expect(paper).to_not be_valid
   end
 
-  it "should have a empty list of authors" do
+  it "should have a empty list of authors for a new paper" do
     paper = Paper.new
 
     expect(paper.authors).to eq([])
