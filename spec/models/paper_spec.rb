@@ -23,4 +23,24 @@ RSpec.describe Paper, type: :model do
 
     expect(paper).to_not be_valid
   end
+
+  it "should not be valid without a venue" do
+    paper = build :paper
+    paper.venue = ""
+
+    expect(paper).to_not be_valid
+  end
+
+  it "should not be valid without a numerical year" do
+    paper = build :paper
+
+    paper.year = ""
+    expect(paper).to_not be_valid
+
+    paper.year = 1999
+    expect(paper).to be_valid
+
+    paper.year = 1.5
+    expect(paper).to_not be_valid
+  end
 end
